@@ -1,0 +1,42 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+Well, it literally means "a pneumoconiosis caused by inhalation of very fine silicate or quartz dust" according to Merriam-Webster, 
+but in the scope of the program, it is 45 characters, which is the largest word in the dictionary that the program will take as 
+input.
+
+1.  According to its man page, what does getrusage do?
+getrusage() returns resource usage measures for the paramter "who."
+
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+There are 16 members in the type struct rusage.
+
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their
+    contents?
+Passing 16 inner variables by the means of duplicating the entire struct wastes memory in the stack. As long as there are no changes
+to variables within the struct itself, it's perfectly fine to send the reference so that memory isn't wasted.
+
+4.  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words, 
+    convince us that you indeed understand how that function’s for loop works.
+In essence, the main method takes in a file using a filestream. Before the loop begins, it creates a char array of a length of 
+LENGTH (45) + 1 so that even the longest word can be taken in. The last + 1 is necessary so that there can be a \0 at the end of the
+array to denote the end of the word. From there, it loops through every single character of the file itself. For every iteration of 
+the character, there is a triple-if-else statement. If the character is part of the alphabet or is an apostrophe, it is added onto
+the current index of the char array (in other words, it's appended to the char array). Otherwise, if it is a number, it will set the
+index to 0 so that new words will overwrite the current word. This way, the program can ignore words with numbers. In the last case
+(most likely a space or other punctuation), the program concludes that the word has ended, so it appends a \0 to the char array. In
+that final else statement, it will check if the word within the char array is misspelled, which works because the char array is for
+all intents and purposes a char*. If it's misspelled, it's printed to the user and tallied onto the number of misspelled words.
+Then, the program sets for the current char array to be overwritten and the process is repeated until the program reached the end of
+the filestream/file.
+
+5.  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like 
+    "%s" to read whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+Using fgetc allows for the ability to discard words that don't match certain patters, such as using numbers within the word.
+Furthermore, we fscanf is used with a format string, all forms of punctuation will be included in the word that is found, which is
+not compatible with the dictioanry since the dictionary only contains alpha values and apostrophes. Lastly, the use of fgetc
+prevents users from overloading the dictionary with either punctuation or more characters beyond the limit specified by LIMIT that
+can make the dictionary much slower and possilbly break it if not coded properly.
+
+6.  Why do you think we declared the parameters for check and load as const (which means "constant")?
+It indicates that although the reference to the parameter is passed in, which is primarily used to modify the values at that memory
+location, the function won't actually change any of the values; thus, the string or char* will remain "constant" at that memory 
+location.

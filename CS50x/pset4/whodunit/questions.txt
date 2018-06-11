@@ -1,0 +1,57 @@
+1.  What’s stdint.h? 
+stdint.h is a header class used to prevent the actual size of data types from varying across different systems and to set 
+exact sizes for data types.
+
+2.  What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+Using uint8_t, uint32_t, int32_t, and uint16_t ensures that the data types created are an unsigned integer with exactly 8 bits,
+an unsigned integer with exactly 32 bits, a signed integer with exactly 32 bits, and an unsigned integer with exactly 16 bits,
+respectively, to prevent data types from taking up more/less space than intended.
+
+3.  How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+A "BYTE" has 1 byte; a "DWORD" has 4 bytes; a "LONG" has 4 bytes; a "WORD" has 2 bytes.
+
+4.  What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file 
+    formats (with high probability) are generally called "magic numbers."
+As per the BITMAPFILEHEADER structure, a BMP file must start with "BM," which is 0x4d42.
+
+5.  What’s the difference between bfSize and biSize?
+Whereas bfSize represents the size of the entire bitmap file in bytes, biSize represents the size of just the BITMAPINFOHEADER 
+structure in bytes.
+
+6.  What does it mean if biHeight is negative?
+According to the documentation for the BITMAPINFOHEADER structure, a negative biHeight (typically the height of the bitmap in
+pixels) indicates a top-down DIB that cannot be compressed. Thus, biCompression must be either BI_RGB or BI_BITFIELDS.
+
+7.  What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+biBitCount defines the number of bits-per-pixel in a bmp file.
+
+8.  Why might fopen return NULL in lines 24 and 32 of copy.c?
+fopen may return NULL in lines 24 and 32 of copy.c if the file cannot be found to read from or if there is not enough memory to open
+the file within memory.
+
+9.  Why is the third argument to fread always 1 in our code?
+fread only needs to read 1 element of the size of a BITMAPFILEHEADER, BITMAPINFOHEADER, or pixel and store it to a place in memory.
+There is no need to read beyond that specific struct / element when saving it to a memory location.
+
+10. What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+It would assign:
+   (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4
+ = (4 - (3 * 3 % 4) % 4
+ = (4 - (9 % 4) % 4
+ = (4 - 1 % 4)
+ = (4 - 1)
+ = 3
+ 
+11. What does fseek do?
+fessek sets the file position indicator for the stream / file indicated.
+In the case of the program:
+
+>   // skip over padding, if any
+>   fseek(inptr, padding, SEEK_CUR);
+
+fseek offsets the file position indicator in the stream "inptr" by the integer padding respective to the current position indicator.
+In other words, fseek skips the set amount by padding and sets the file position indicator indicative of the next row.
+
+12. What is SEEK_CUR?
+SEEK_CUR is a constant integer defined in the file containing fseek. SEEK_CUR indicates that the offset by fseek is relative to the 
+current position indicator rather than to the start- or end-of-the-file.

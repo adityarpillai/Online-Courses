@@ -3,6 +3,14 @@ My programming from online courses I've completed.
 
 Here is a quick list of the courses:
 
+## CS50x by Harvard University
+
+https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x
+
+This is CS50x, Harvard University's introduction to the intellectual enterprises of computer science and the art of programming for majors and non-majors alike, with or without prior programming experience. An entry-level course taught by David J. Malan, CS50x teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. The on-campus version of CS50x, CS50, is Harvard's largest course.
+
+NOTE: Most of this course takes place on the online IDE Cloud9. Thus, I was copying most of my code to this repository, but for later projects with more dependencies, it became increasingly difficult to copy everything over. Thus, most of the later week assignments are not on this repository.
+
 ## Algorithmic Toolbox by the University of California San Diego
 
 https://www.coursera.org/learn/algorithmic-toolbox
